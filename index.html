@@ -1,1 +1,109 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulario NOC - Registro de Eventos</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #0d1117;
+            color: #c9d1d9;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            background-color: #161b22;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+            width: 100%;
+            max-width: 500px;
+            border: 1px solid #30363d;
+        }
+        h2 {
+            margin-top: 0;
+            color: #58a6ff;
+            text-align: center;
+        }
+        .form-group {
+            margin-bottom: 18px;
+        }
+        label {
+            display: block;
+            margin-bottom: 6px;
+            font-weight: 600;
+            font-size: 0.9em;
+        }
+        input, select, textarea {
+            width: 100%;
+            padding: 10px;
+            border-radius: 6px;
+            border: 1px solid #30363d;
+            background-color: #0d1117;
+            color: #f0f6fc;
+            box-sizing: border-box;
+            font-size: 0.95em;
+        }
+        input:focus, select:focus, textarea:focus {
+            outline: none;
+            border-color: #58a6ff;
+        }
+        button {
+            width: 100%;
+            padding: 12px;
+            background-color: #238636;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 1em;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+        button:hover {
+            background-color: #2ea043;
+        }
+    </style>
+</head>
+<body>
 
+<div class="container">
+    <h2>Registro de Incidencia NOC</h2>
+    <form action="#" method="post" onsubmit="event.preventDefault(); alert('¡Formulario enviado con éxito!');">
+        
+        <div class="form-group">
+            <label for="operador">Operador NOC:</label>
+            <input type="text" id="operador" name="operador" placeholder="Ej: SuricatoRoot" required>
+        </div>
+
+        <div class="form-group">
+            <label for="nodo">Nodo / Dispositivo:</label>
+            <input type="text" id="nodo" name="nodo" placeholder="Ej: Router-Core-01" required>
+        </div>
+
+        <div class="form-group">
+            <label for="prioridad">Nivel de Prioridad:</label>
+            <select id="prioridad" name="prioridad">
+                <option value="baja">Baja (P4)</option>
+                <option value="media">Media (P3)</option>
+                <option value="alta">Alta (P2)</option>
+                <option value="critica">Crítica (P1)</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="descripcion">Descripción del Evento:</label>
+            <textarea id="descripcion" name="descripcion" rows="4" placeholder="Detalla el fallo o caída observada..."></textarea>
+        </div>
+
+        <button type="submit">Guardar Registro</button>
+    </form>
+</div>
+
+</body>
+</html>
