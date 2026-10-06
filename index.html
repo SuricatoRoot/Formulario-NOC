@@ -32,6 +32,7 @@ body{margin:0;background:#eef2f6;padding:32px 16px 48px}
 .sl-box span{font-size:13px;color:var(--sl-dim);line-height:1.45}
 .sl-tag{display:inline-block;align-self:flex-start;margin-top:4px;font-family:var(--sl-mono);font-size:11.5px;font-weight:700;padding:3px 8px;border-radius:6px;background:#e9f6ef;color:#15803d}
 .sl-tag.sl-paid{background:#e5f4f8;color:#0b6e8f}
+.sl-tool{font-style:normal;font-family:var(--sl-mono);font-size:12px;font-weight:700;letter-spacing:.4px;color:#0b6e8f}
 .sl-hint{font-size:12.5px;color:var(--sl-faint);margin-top:6px}
 .sl-prev{margin-top:22px;border:1px dashed var(--sl-border);border-radius:10px;background:#f7f9fb}
 .sl-prev-h{font-size:11.5px;font-weight:700;letter-spacing:1px;color:var(--sl-faint);padding:10px 14px 0;text-transform:uppercase}
@@ -71,8 +72,8 @@ body{margin:0;background:#eef2f6;padding:32px 16px 48px}
 
     <div class="sl-step"><span class="sl-n">3</span>Elige</div>
     <div class="sl-choices">
-      <label class="sl-opt"><input type="radio" name="slPlan" value="MENSUAL"><span class="sl-box"><b>Plan mensual</b><span>Licencia completa, renovación mes a mes.</span><em class="sl-tag sl-paid">S/ 20 al mes</em></span></label>
-      <label class="sl-opt"><input type="radio" name="slPlan" value="PRUEBA"><span class="sl-box"><b>Probar ahora</b><span>Activa una prueba para testear la herramienta.</span><em class="sl-tag">GRATIS</em></span></label>
+      <label class="sl-opt"><input type="radio" name="slPlan" value="MENSUAL"><span class="sl-box"><b>Plan mensual</b><i class="sl-tool">MONITOR NOC SERVER</i><span>Licencia completa, renovación mes a mes.</span><em class="sl-tag sl-paid">S/ 20 al mes</em></span></label>
+      <label class="sl-opt"><input type="radio" name="slPlan" value="PRUEBA"><span class="sl-box"><b>Probar ahora</b><i class="sl-tool">MONITOR NOC STANDARD</i><span>Activa una prueba para testear la herramienta.</span><em class="sl-tag">GRATIS</em></span></label>
     </div>
 
     <div class="sl-step"><span class="sl-n">4</span>ID de tu equipo</div>
@@ -101,10 +102,12 @@ body{margin:0;background:#eef2f6;padding:32px 16px 48px}
     var uso=val('slUso'), plan=val('slPlan');
     var usoTxt = uso==='EMPRESA' ? 'EMPRESA'+(emp.value.trim()?' – '+emp.value.trim():'') : (uso||'—');
     var planTxt = plan==='MENSUAL' ? 'PLAN MENSUAL (S/ 20 al mes)' : (plan==='PRUEBA' ? 'PROBAR AHORA (GRATIS)' : '—');
+    var toolTxt = plan==='MENSUAL' ? 'MONITOR NOC SERVER' : (plan==='PRUEBA' ? 'MONITOR NOC STANDARD' : '—');
     return '*SOLICITUD DE LICENCIA · MONITOR NOC*\n\n'+
       '*Nombre:* '+(nm.value.trim()||'—')+'\n'+
       '*Uso:* '+usoTxt+'\n'+
       '*Plan:* '+planTxt+'\n'+
+      '*Herramienta:* '+toolTxt+'\n'+
       '*ID de equipo:* '+(cleanId()||'—');
   }
   function paint(){
