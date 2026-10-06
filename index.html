@@ -47,7 +47,7 @@ body{margin:0;background:#eef2f6;padding:32px 16px 48px}
   <div class="sl-hero">
     <div class="sl-kicker">MONITOR NOC · SOLICITAR LICENCIA</div>
     <h2>BIENVENIDO NOC, LISTO PARA TESTEAR…</h2>
-    <p>Completa estos datos y envía tu solicitud por WhatsApp. Te responderemos con tu código de activación.</p>
+    <p>Completa estos datos. Te responderemos con tu código de activación.</p>
   </div>
   <form class="sl-card" id="slForm" novalidate>
     <div class="sl-price">
@@ -85,7 +85,6 @@ body{margin:0;background:#eef2f6;padding:32px 16px 48px}
       <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M17.47 14.38c-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.16-.17.2-.35.22-.64.07-.3-.15-1.26-.46-2.39-1.47-.88-.79-1.48-1.76-1.65-2.06-.17-.3-.02-.46.13-.6.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.08-.15-.67-1.61-.92-2.2-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.79.37-.27.3-1.04 1.02-1.04 2.48 0 1.46 1.07 2.88 1.21 3.07.15.2 2.1 3.2 5.08 4.49.71.31 1.26.49 1.69.63.71.23 1.36.2 1.87.12.57-.09 1.76-.72 2.01-1.41.25-.7.25-1.29.17-1.41-.07-.12-.27-.2-.57-.35M12.05 21.8h-.01a9.87 9.87 0 01-5.03-1.38l-.36-.21-3.74.98 1-3.65-.24-.37a9.86 9.86 0 01-1.51-5.26c0-5.45 4.44-9.88 9.89-9.88 2.64 0 5.12 1.03 6.99 2.9a9.83 9.83 0 012.89 6.99c0 5.45-4.44 9.88-9.89 9.88m8.41-18.3A11.82 11.82 0 0012.05 0C5.5 0 .16 5.34.16 11.89c0 2.1.55 4.14 1.59 5.95L.06 24l6.3-1.65a11.88 11.88 0 005.68 1.45h.01c6.55 0 11.89-5.34 11.89-11.89 0-3.18-1.24-6.16-3.48-8.41"/></svg>
       Enviar por WhatsApp
     </button>
-    <div class="sl-foot">Se abrirá WhatsApp con el mensaje listo para enviar al <b>+51 991 721 520</b>.</div>
   </form>
 </div>
 
@@ -103,10 +102,10 @@ body{margin:0;background:#eef2f6;padding:32px 16px 48px}
     var usoTxt = uso==='EMPRESA' ? 'EMPRESA'+(emp.value.trim()?' – '+emp.value.trim():'') : (uso||'—');
     var planTxt = plan==='MENSUAL' ? 'PLAN MENSUAL (S/ 20 al mes)' : (plan==='PRUEBA' ? 'PROBAR AHORA (GRATIS)' : '—');
     return '*SOLICITUD DE LICENCIA · MONITOR NOC*\n\n'+
-      '👤 *Nombre:* '+(nm.value.trim()||'—')+'\n'+
-      '🏢 *Uso:* '+usoTxt+'\n'+
-      '📦 *Plan:* '+planTxt+'\n'+
-      '🔑 *ID de equipo:* '+(cleanId()||'—');
+      '*Nombre:* '+(nm.value.trim()||'—')+'\n'+
+      '*Uso:* '+usoTxt+'\n'+
+      '*Plan:* '+planTxt+'\n'+
+      '*ID de equipo:* '+(cleanId()||'—');
   }
   function paint(){
     empW.hidden = val('slUso')!=='EMPRESA';
