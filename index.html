@@ -130,7 +130,7 @@ body{margin:0;background:#eef2f6;padding:32px 16px 48px}
   }catch(_){ if(window.SL_PREFILL_ID) idI.value=window.SL_PREFILL_ID; }
 
   // Edicion del ejecutable que abrio el formulario (&ed=STANDARD|SERVER).
-  // STANDARD -> solo Personal + Probar ahora. SERVER -> solo Plan mensual.
+  // STANDARD -> solo Personal + Probar ahora. SERVER -> solo Empresa + Plan mensual.
   // Sin &ed (entrada directa a la pagina) -> todo seleccionable, como siempre.
   var ED='';
   try{ ED=(new URLSearchParams(location.search).get('ed')||'').toUpperCase(); }catch(_){}
@@ -148,9 +148,10 @@ body{margin:0;background:#eef2f6;padding:32px 16px 48px}
     edTxt.innerHTML='Solicitud desde <b>MONITOR NOC STANDARD</b>: uso personal con prueba gratis.';
     edBox.hidden=false;
   }else if(ED==='SERVER'){
-    lockOff('slPlan','PRUEBA');
-    pick('slPlan','MENSUAL');
-    edTxt.innerHTML='Solicitud desde <b>MONITOR NOC SERVER</b>: plan mensual.';
+    // SERVER: fijo en Empresa + Plan mensual (Personal y la prueba STANDARD no aplican).
+    lockOff('slUso','PERSONAL'); lockOff('slPlan','PRUEBA');
+    pick('slUso','EMPRESA'); pick('slPlan','MENSUAL');
+    edTxt.innerHTML='Solicitud desde <b>MONITOR NOC SERVER</b>: empresa con plan mensual.';
     edBox.hidden=false;
   }
   f.addEventListener('input',paint); f.addEventListener('change',paint); paint();
