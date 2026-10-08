@@ -42,6 +42,11 @@ body{margin:0;background:#eef2f6;padding:32px 16px 48px}
 .sl-wa:hover{background:#178a4d}
 .sl-wa:active{transform:scale(.99)}
 .sl-foot{text-align:center;font-size:12.5px;color:var(--sl-faint);margin-top:12px}
+.sl-opt.sl-off{cursor:not-allowed}
+.sl-opt.sl-off .sl-box{opacity:.45;background:#f3f5f7;border-style:dashed}
+.sl-opt.sl-off:hover .sl-box{border-color:var(--sl-border)}
+.sl-ed{display:flex;gap:10px;align-items:flex-start;background:#e5f4f8;border:1px solid #b6dcea;color:#0b4f66;border-radius:10px;padding:12px 14px;font-size:14px;line-height:1.5;margin-top:10px}
+.sl-ed svg{flex:none;margin-top:2px}
 
 </style></head><body>
 <div class="sl-wrap" id="slWrap">
@@ -53,6 +58,10 @@ body{margin:0;background:#eef2f6;padding:32px 16px 48px}
     <div class="sl-price">
       <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="12" cy="12" r="10"/><path d="M12 8v4M12 16h.01"/></svg>
       <div>Antes de continuar, revisa bien tus datos. La prueba es gratis.</div>
+    </div>
+    <div class="sl-ed" id="slEd" hidden>
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="3" y="4" width="18" height="12" rx="2"/><path d="M8 20h8M12 16v4"/></svg>
+      <div id="slEdTxt"></div>
     </div>
 
     <div class="sl-step"><span class="sl-n">1</span>Tus datos</div>
@@ -119,6 +128,31 @@ body{margin:0;background:#eef2f6;padding:32px 16px 48px}
     var pre=q.get('id') || (h?new URLSearchParams(h).get('id'):'') || (window.SL_PREFILL_ID||'');
     if(pre) idI.value=pre.toUpperCase();
   }catch(_){ if(window.SL_PREFILL_ID) idI.value=window.SL_PREFILL_ID; }
+
+  // Edicion del ejecutable que abrio el formulario (&ed=STANDARD|SERVER).
+  // STANDARD -> solo Personal + Probar ahora. SERVER -> solo Plan mensual.
+  // Sin &ed (entrada directa a la pagina) -> todo seleccionable, como siempre.
+  var ED='';
+  try{ ED=(new URLSearchParams(location.search).get('ed')||'').toUpperCase(); }catch(_){}
+  function radio(n,v){return f.querySelector('input[name="'+n+'"][value="'+v+'"]');}
+  function pick(n,v){var r=radio(n,v); if(r) r.checked=true;}
+  function lockOff(n,v){
+    var r=radio(n,v); if(!r) return;
+    r.checked=false; r.disabled=true;
+    var l=r.closest('.sl-opt'); if(l){l.classList.add('sl-off'); l.title='No disponible para esta edición';}
+  }
+  var edBox=$('slEd'), edTxt=$('slEdTxt');
+  if(ED==='STANDARD'){
+    lockOff('slUso','EMPRESA'); lockOff('slPlan','MENSUAL');
+    pick('slUso','PERSONAL'); pick('slPlan','PRUEBA');
+    edTxt.innerHTML='Solicitud desde <b>MONITOR NOC STANDARD</b>: uso personal con prueba gratis.';
+    edBox.hidden=false;
+  }else if(ED==='SERVER'){
+    lockOff('slPlan','PRUEBA');
+    pick('slPlan','MENSUAL');
+    edTxt.innerHTML='Solicitud desde <b>MONITOR NOC SERVER</b>: plan mensual.';
+    edBox.hidden=false;
+  }
   f.addEventListener('input',paint); f.addEventListener('change',paint); paint();
   function bad(el,on){ if(el) el.classList.toggle('sl-bad',!!on); }
   f.addEventListener('submit',function(e){
